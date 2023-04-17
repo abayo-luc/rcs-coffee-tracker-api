@@ -1,0 +1,26 @@
+{
+  "development": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "logging": true,
+    "seederStorage": "sequelize"
+  },
+  "test": {
+    "use_env_variable": "DATABASE_URL_TEST",
+    "dialect": "postgres",
+    "logging": false,
+    "seederStorage": "sequelize"
+  },
+  "staging": {
+    "logging": false,
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "seederStorage": "sequelize"
+  },
+  "production": {
+    "logging": false,
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "seederStorage": "sequelize"
+  }
+}
