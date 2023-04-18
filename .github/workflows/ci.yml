@@ -15,6 +15,18 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
+    services:
+      postgres:
+        image: postgres:13.2
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: rcs_test
+        ports:
+          # will assign a random free host port
+          - 5432/tcp
+        # needed because the postgres container does not provide a health check
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -23,3 +35,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --frozen-lockfile
       - run: yarn test:ci
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/rcs_test
+          DATABASE_URL_TEST: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/rcs_test
+          APP_SECRETE: ${{ secrets.APP_SECRETE }}
