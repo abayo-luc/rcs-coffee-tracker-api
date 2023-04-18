@@ -1,5 +1,3 @@
-import { Request, Response } from 'express';
-import handleAsync from '../../../utils/handleAsync';
 import { Shipment } from '../../../database/models/shipment';
 import { MainController } from '../MainController';
 
