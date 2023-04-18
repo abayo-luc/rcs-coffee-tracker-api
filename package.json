@@ -7,7 +7,7 @@
   "scripts": {
     "test": "NODE_ENV=test jest --watchAll --coverage --detectOpenHandles",
     "test:ci": "NODE_ENV=test yarn db:migrate && jest --coverage --collect-coverage --detectOpenHandles --forceExit",
-    "start": "node dist/index.js",
+    "start": "node /dist/index.js",
     "start:dev": "nodemon --exec ts-node-dev src/index.ts",
     "db:migrate": "yarn sequelize db:migrate",
     "build": "tsc && cpx \"src/**/*.json\" dist"
