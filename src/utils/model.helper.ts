@@ -1,19 +1,25 @@
-import { CustomError } from './constants';
+import { Op } from 'sequelize';
 
-export const findById = async (id: string, model: any) => {
-  const data = await model.findByPk(id);
-  if (!data) {
-    throw new CustomError('Record not found', 404);
+export const textSearch: { [key: string]: any } = (
+  text: string,
+  fields: string[]
+) => {
+  if (text) {
+    return {
+      [Op.or]: fields.map((item) => ({
+        [item]: {
+          [Op.like]: `%${text}%`,
+        },
+      })),
+    };
   }
-  return data;
+  return {};
 };
 
-export const update = async (
-  id: string,
-  data: { [key: string]: any },
-  model: any
-) => {
-  const record = await findById(id, model);
-  record.set(data);
-  return record.save();
+export const paginate = ({ page = 1, limit = 50 }) => {
+  const offset = (page - 1) * limit;
+  return {
+    offset: offset,
+    limit: limit,
+  };
 };
