@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import * as userController from './user.controller';
-import * as userValidator from './user.validator';
+import userController from './users.controller';
+import * as userValidator from './users.validator';
 import authenticate from '../../../middlewares/authenticate';
 
 const router = Router();
@@ -11,8 +11,8 @@ router.post(
   userController.create
 );
 
-router.get('/', authenticate, userController.getAll);
-router.get('/:id', authenticate, userController.getById);
+router.get('/', authenticate, userController.findAll);
+router.get('/:id', authenticate, userController.findById);
 router.post(
   '/login',
   userValidator.login,

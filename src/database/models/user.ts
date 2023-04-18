@@ -10,8 +10,8 @@ export class User extends Model {
   public email!: string;
   public password!: string;
   public role!: UserRole;
-  public readonly created_at!: Date;
-  public readonly updated_at!: Date;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 
   public comparePassword(password: string) {
     return bcrypt.compareSync(password, this.password);
