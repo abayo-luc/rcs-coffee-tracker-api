@@ -46,7 +46,7 @@ export class MainController {
           limit: Number(limit),
         }),
       });
-      return res.status(200).json({ response });
+      return res.status(200).json(response);
     }
   );
 

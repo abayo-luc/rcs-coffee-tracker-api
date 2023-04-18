@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: test
+      POSTGRES_DB: rcs
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
@@ -16,7 +16,7 @@ services:
     restart: always
     environment:
       NODE_ENV: production
-      DATABASE_URL: postgres://postgres:password@db:5432/test
+      DATABASE_URL: postgres://postgres:password@db:5432/rcs
     volumes:
       - .:/app
     ports:

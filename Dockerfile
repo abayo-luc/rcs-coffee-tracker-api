@@ -6,12 +6,15 @@ WORKDIR /app
 
 # Copy the package.json and package-lock.json files into the container
 COPY package*.json ./
+COPY yarn.lock ./
 
 # Install the dependencies
-RUN npm install
+RUN yarn install
 
 # Copy the rest of the application files into the container
 COPY . .
+
+RUN yarn build
 
 # Set the environment variable for the Node.js app
 ENV NODE_ENV production
@@ -20,4 +23,4 @@ ENV NODE_ENV production
 EXPOSE 3000
 
 # Start the Node.js app
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
