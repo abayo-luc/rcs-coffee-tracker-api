@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import handleAsync from '../../../utils/handleAsync';
 import { User } from '../../../database/models/user';
-import { hashString } from '../../../utils';
+import { getJWT, hashString } from '../../../utils';
 import { CustomError } from '../../../utils/constants';
 import { MainController } from '../MainController';
 
@@ -42,7 +42,7 @@ class UserController extends MainController {
       if (!user) {
         throw new CustomError(
           'Invalid email or password',
-          401
+          400
         );
       }
 
@@ -53,17 +53,10 @@ class UserController extends MainController {
       if (!isValidPassword) {
         throw new CustomError(
           'Invalid email or password',
-          401
+          400
         );
       }
-      const token = jwt.sign(
-        {
-          provider: 'rcs-coffee-tracker-api',
-          id: user.id,
-          role: user.role,
-        },
-        process.env.APP_SECRETE as string
-      );
+      const token = getJWT(user);
       return res.status(200).json({
         token,
         user,

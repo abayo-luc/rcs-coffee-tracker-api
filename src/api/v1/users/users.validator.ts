@@ -9,7 +9,7 @@ export const create = celebrate({
         .min(6)
         .message('invalid password')
         .required(),
-      email: Joi.string().email(),
+      email: Joi.string().email().required(),
       role: Joi.string().allow('USER', 'ADMIN'),
     })
     .options({

@@ -1,9 +1,9 @@
 import { Op } from 'sequelize';
 
-export const textSearch: { [key: string]: any } = (
+export const textSearch = (
   text: string,
   fields: string[]
-) => {
+): { [key: string]: any } => {
   if (text) {
     return {
       [Op.or]: fields.map((item) => ({
